@@ -66,7 +66,9 @@ def main():
                     image = cv2.imread(fname)
                     age_image = setup.classify_age(image)
                     window.close()
-                    cv2.putText(age_image, 'Premi \'ESC\' per chiudere', (10, 20), cv2.FONT_ITALIC, 0.5, (0, 0, 0), 1, cv2.LINE_4)
+                    (esc_text_w, esc_text_h), esc_text_baseline = cv2.getTextSize("Premi \'ESC\' per uscire", fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=1)
+                    cv2.rectangle(age_image, (10 - 1, 20 + esc_text_h), (10 + esc_text_w + 1, 20 + esc_text_h - 50), (0, 0, 255), cv2.FILLED)
+                    cv2.putText(age_image, "Premi \'ESC\' per uscire", org=(10, 20), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.6, thickness=1, color=(0, 0, 0,), lineType=cv2.LINE_AA)
                     while True:
                         cv2.imshow(title + ' - Foto', age_image)
                         if cv2.waitKey(1) == 27:
@@ -103,9 +105,11 @@ def main():
                     while(capture.isOpened()):
                         window.close()
                         ret, frame = capture.read()
-                        cv2.putText(frame, 'Premi \'ESC\' per chiudere', (10, 20), cv2.FONT_ITALIC, 0.5, (0, 0, 0), 1, cv2.LINE_4)
                         if ret == True:
                             age_video = setup.classify_age(frame)
+                            (esc_text_w, esc_text_h), esc_text_baseline = cv2.getTextSize("Premi \'ESC\' per uscire", fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=1)
+                            cv2.rectangle(age_video, (10 - 1, 20 + esc_text_h), (10 + esc_text_w + 1, 20 + esc_text_h - 50), (0, 0, 255), cv2.FILLED)
+                            cv2.putText(age_video, "Premi \'ESC\' per uscire", org=(10, 20), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=1, color=(0, 0, 0,), lineType=cv2.LINE_AA)
                             cv2.imshow(title + ' - Video', age_video)
                             if cv2.waitKey(1) == 27:
                                 break
@@ -123,9 +127,11 @@ def main():
         while capture.isOpened():
             window.close()
             ret, frame = capture.read()
-            cv2.putText(frame, 'Premi \'ESC\' per chiudere', (10, 20), cv2.FONT_ITALIC, 0.5, (0, 0, 0), 1, cv2.LINE_4)
             if ret == True:
                 age_image = setup.classify_age(frame)
+                (esc_text_w, esc_text_h), esc_text_baseline = cv2.getTextSize("Premi \'ESC\' per uscire", fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=1)
+                cv2.rectangle(age_image, (10 - 1, 20 + esc_text_h), (10 + esc_text_w + 1, 20 + esc_text_h - 50), (0, 0, 255), cv2.FILLED)
+                cv2.putText(age_image, "Premi \'ESC\' per uscire", org=(10, 20), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, thickness=1, color=(0, 0, 0,), lineType=cv2.LINE_AA)
                 cv2.imshow(title + ' - Webcam', age_image)
                 if cv2.waitKey(1) == 27:
                     break
